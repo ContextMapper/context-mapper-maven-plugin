@@ -1,5 +1,7 @@
 package org.contextmapper.maven;
 
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
@@ -7,13 +9,13 @@ import org.apache.maven.project.MavenProject;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import static org.contextmapper.maven.FileUtils.resolveFile;
+import static org.contextmapper.maven.FileUtils.resolveInputFile;
 import static org.contextmapper.maven.FileUtils.resolveOutputDirectory;
 
 /**
  * Abstract generator mojo.
  */
-public class AbstractContextMapperGeneratorMojo {
+public abstract class AbstractContextMapperGeneratorMojo extends AbstractMojo {
   /**
    * Property to skip the execution of the mojo.
    */
@@ -35,7 +37,7 @@ public class AbstractContextMapperGeneratorMojo {
   /**
    * Output directory to generate the diagrams into.
    */
-  @Parameter(defaultValue = "${project.build}/generated-sources/cml", required = true)
+  @Parameter(defaultValue = "${project.build}/context-mapper", required = true)
   private String outputDirectory;
 
   private File input;
@@ -49,16 +51,16 @@ public class AbstractContextMapperGeneratorMojo {
     return input;
   }
 
-  void validate() throws MojoFailureException {
+  void validate() throws MojoExecutionException {
     try {
-      input = resolveFile(this.project, this.inputFile);
+      input = resolveInputFile(this.project, this.inputFile);
     } catch (FileNotFoundException e) {
-      throw new MojoFailureException("Could not open input file " + inputFile, e);
+      throw new MojoExecutionException(e.getMessage());
     }
     try {
       output = resolveOutputDirectory(this.project, this.outputDirectory);
     } catch (FileNotFoundException e) {
-      throw new MojoFailureException("Could not find output directory " + outputDirectory, e);
+      throw new MojoExecutionException(e.getMessage());
     }
   }
 

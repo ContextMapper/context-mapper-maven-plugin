@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 public class FileUtils {
 
-  public static File resolveFile(MavenProject project, String filename) throws FileNotFoundException {
+  public static File resolveInputFile(MavenProject project, String filename) throws FileNotFoundException {
     File file = new File(filename);
     if (file.isAbsolute() && file.exists() && file.isFile()) {
       return file;
@@ -18,13 +18,13 @@ public class FileUtils {
         return file;
       }
     }
-    throw new FileNotFoundException("Could not find specified file: " + filename);
+    throw new FileNotFoundException("Could not find input file: " + filename);
   }
 
 
   public static File resolveOutputDirectory(MavenProject project, String dirName) throws FileNotFoundException {
     if (dirName == null || "".equals(dirName)) {
-      throw new IllegalArgumentException("Output directory must be provided.");
+      throw new FileNotFoundException("Output directory must be provided.");
     }
     // try absolute path
     File dir = new File(dirName);
@@ -32,7 +32,7 @@ public class FileUtils {
       if (dir.exists() && dir.isDirectory()) {
         return dir;
       } else {
-        throw new FileNotFoundException("Could not find specified dir: " + dirName);
+        throw new FileNotFoundException("Could not find output directory: " + dirName);
       }
     } else {
       // try relative path to the project basedir
@@ -43,7 +43,7 @@ public class FileUtils {
         if (dir.mkdirs()) {
           return dir;
         } else {
-          throw new FileNotFoundException("Could not create specified dir: " + dirName);
+          throw new FileNotFoundException("Could not create output directory: " + dirName);
         }
       }
     }
