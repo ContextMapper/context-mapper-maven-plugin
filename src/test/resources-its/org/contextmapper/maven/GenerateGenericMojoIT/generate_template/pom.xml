@@ -18,11 +18,13 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>generate-plant-uml</goal>
+                            <goal>generate-template</goal>
                         </goals>
                         <configuration>
-                            <skip>false</skip>
                             <inputFile>src/main/cml/Insurance-Example-Model.cml</inputFile>
+                            <templateFile>src/main/cml/template.ftl</templateFile>
+                            <outputDirectory>target/generated-sources/docs</outputDirectory>
+                            <outputFile>list-of-bcs.md</outputFile>
                         </configuration>
                     </execution>
                 </executions>

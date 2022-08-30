@@ -20,7 +20,14 @@ import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 public class PlantUmlGeneratorContextMapMojo extends AbstractContextMapperGeneratorMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        validate();
+
+        if (super.isSkip()) {
+            super.getLog().info("Skipping Plant UML diagram generation, because it is disabled by property.");
+            return;
+        }
+
+
+        validateAndSetupInputAndOutput();
         try {
             StandaloneContextMapperAPI cmAPI = ContextMapperStandaloneSetup.getStandaloneAPI();
             CMLResource cmlResource = cmAPI.loadCML(getInput());

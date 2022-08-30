@@ -21,8 +21,7 @@
                             <goal>generate-context-map</goal>
                         </goals>
                         <configuration>
-                            <skip>false</skip>
-                            <inputFile>src/main/cml/Insurance-Example-Model.cml</inputFile>
+                            <inputFile>src/main/cml/missing.cml</inputFile>
                         </configuration>
                     </execution>
                 </executions>

@@ -17,7 +17,17 @@ import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 public class ContextMapperGeneratorContextMapMojo extends AbstractContextMapperGeneratorMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        validate();
+
+        if (super.isSkip()) {
+            getLog().info("Skipping context map generation, because it is disabled by property.");
+            return;
+        }
+
+        validateAndSetupInputAndOutput();
+
+        getLog().info("Generating context maps from " + getInput().toString());
+        getLog().info("Output will is generated to " + getOutput().toString());
+
         try {
             StandaloneContextMapperAPI cmAPI = ContextMapperStandaloneSetup.getStandaloneAPI();
             CMLResource cmlResource = cmAPI.loadCML(getInput());

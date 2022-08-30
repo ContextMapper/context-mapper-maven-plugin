@@ -25,17 +25,9 @@ public class GenerateContextMapMojoIT {
     @MavenTest
     public void generate_context_map(MavenExecutionResult result) {
         assertThat(result).isSuccessful();
-        assertThat(result).project().hasTarget().withFile("generated-sources/cml/Insurance-Example-Model_ContextMap.svg");
-        assertThat(result).project().hasTarget().withFile("generated-sources/cml/Insurance-Example-Model_ContextMap.png");
-        assertThat(result).project().hasTarget().withFile("generated-sources/cml/Insurance-Example-Model_ContextMap.gv");
-    }
-
-    @MavenTest
-    public void generate_context_map_to_default_output(MavenExecutionResult result) {
-        assertThat(result).isSuccessful();
-        assertThat(result).project().hasTarget().withFile("context-mapper/Insurance-Example-Model_ContextMap.svg");
-        assertThat(result).project().hasTarget().withFile("context-mapper/Insurance-Example-Model_ContextMap.png");
-        assertThat(result).project().hasTarget().withFile("context-mapper/Insurance-Example-Model_ContextMap.gv");
+        assertThat(result).project().hasTarget().withFile("generated-sources/cml/Insurance-Example-Model_ContextMap.svg").exists();
+        assertThat(result).project().hasTarget().withFile("generated-sources/cml/Insurance-Example-Model_ContextMap.png").exists();
+        assertThat(result).project().hasTarget().withFile("generated-sources/cml/Insurance-Example-Model_ContextMap.gv").exists();
     }
 
     private File expectedContent(MavenExecutionResult result, String expectedResourcePath) {

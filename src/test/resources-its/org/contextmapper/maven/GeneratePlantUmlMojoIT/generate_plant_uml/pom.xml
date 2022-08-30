@@ -23,7 +23,7 @@
                         <configuration>
                             <skip>false</skip>
                             <inputFile>src/main/cml/Insurance-Example-Model.cml</inputFile>
-                            <outputDirectory>target/generated-sources/cml</outputDirectory>
+                            <outputDirectory>target/generated-sources/puml</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
