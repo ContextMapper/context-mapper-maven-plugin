@@ -1,6 +1,6 @@
 target/
 .idea/
-
+/.mvn/wrapper/maven-wrapper.jar
 !/src/test/resources-its/org/contextmapper/maven/GenerateGenericMojoIT/generate_template/target/list-of-bcs.md
 !/src/test/resources-its/org/contextmapper/maven/GenerateGenericMojoIT/generate_template/target/
 
